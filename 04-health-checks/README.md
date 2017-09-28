@@ -58,6 +58,8 @@ Our `evns/simple-service` container has an endpoint to toggle the health of the 
 > curl -X GET http://192.168.99.100:32233/toggle-health
 ```
 
+_Note: your port will probably vary here_
+
 Checking the status of the pods we'll see one of them is in a non-ready state as the readiness probe failed.  Looking at the deployment, we'll see only 2 out of the 3 pods are available.
 
 ```
