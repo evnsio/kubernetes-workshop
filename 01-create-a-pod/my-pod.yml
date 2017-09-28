@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-pod
+spec:
+  containers:
+  - name: simple-service
+    image: evns/simple-service
+    ports:
+    - containerPort: 8080
