@@ -2,11 +2,11 @@
 
 The health of Pods in Kubernetes is split into two 'probes':
 
-* `livenessProbe`: Indicates whether the Container is running. If the liveness probe fails, the kubelet kills the Container, and the Container is subjected to its restart policy. 
+* `livenessProbe`: Indicates whether the Container is running. If the liveness probe fails, the kubelet kills the Container, and the Container is subjected to its restart policy.
 
 * `readinessProbe`: Indicates whether the Container is ready to service requests. If the readiness probe fails, any services selecting the pod will stop sending traffic to it.
 
-Probes are defined as part of the Pod spec, a simlpe deployment might look like this:
+Probes are defined as part of the Pod spec, a simple deployment might look like this:
 
 ```
 apiVersion: apps/v1beta1
@@ -95,10 +95,10 @@ my-app    3         3         3            1           10h
 In this example we defined `httpGet` probes with a path and port against which probe checks will be made.  The configurable fields of a check are:
 
 * `initialDelaySeconds`:  Number of seconds after the container has started before liveness probes are initiated.
-* `timeoutSeconds`: Number of seconds after which the probe times out. Defaults to 1 second. 
+* `timeoutSeconds`: Number of seconds after which the probe times out. Defaults to 1 second.
 * `periodSeconds`: How often (in seconds) to perform the probe. Default to 10 seconds.
 * `successThreshold`: Minimum consecutive successes for the probe to be considered successful after having failed. Defaults to 1.
-* `failureThreshold`: Minimum consecutive failures for the probe to be considered failed after having succeeded. Defaults to 3. 
+* `failureThreshold`: Minimum consecutive failures for the probe to be considered failed after having succeeded. Defaults to 3.
 
 We've configured `httpGet` probes here, but there are two other types:
 
