@@ -2,7 +2,7 @@
 
 Services are used to:
 
-* Load balance across Pods
+* Load-balance across Pods
 * Provide a stable way to access Pods by IP or DNS
 * Abstract away the volatility of Pod scheduling
 

@@ -2,7 +2,7 @@
 
 Kubernetes abstracts the notion of a container with Pods.  Generally speaking, and for the remainder of this tutorial, they can be thought of as the same thing.
 
-We'll use `evns/simple-service` for the following steps.  This is simple serive with some convenient endpoints for demonstrating Kubernetes features.
+We'll use `evns/simple-service` for the following steps.  This is a simple service with some convenient endpoints for demonstrating Kubernetes features.
 
 A simple Pod spec looks like this:
 
