@@ -89,7 +89,7 @@ my-app-4110576992-wsl2f   1/1       Running   1          9h
 > kubectl get deployment
 
 NAME      DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
-my-app    3         3         3            1           10h
+my-app    3         3         3            3           10h
 ```
 
 ### Additional details
