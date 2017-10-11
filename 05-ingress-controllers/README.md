@@ -1,22 +1,22 @@
 # 05 Ingress Controllers
 
-In this section, we'll create an Nginx Ingress Controller using Helm, and show how we can dynamically configure Ingress rules to map to our services.
+In this section we'll create an Nginx Ingress Controller, and show how we can dynamically configure routing rules which map to our services.
 
 ## What is an Ingress?
 
-An Ingress is a collection of rules that allow inbound connections to reach the cluster services.  We can define Ingress resources as yaml, and have routing rules dynamically created to services running in the cluster.   
+An Ingress is a collection of rules that allow inbound connections to reach  services running in the cluster.  
 
-As an example we might want `my-app.example.org` to map to one service, and `another-app.example.org` to go to another.  
+As an example we might want `my-app.example.org` to map to a service called `foo`, and `another-app.example.org` to go to `bar`.  
 
 Alternatively we might want `my-app.example.org/foo` to end up at the `foo` service, but `my-app.example.org/bar` to go to `bar`
 
 All of this (and quite a bit more!) can be configured through Ingress resources.
 
-## Configure an Ingress Controller
+## Configure an Ingress Controller 
 
-Before we can configure Ingress, we need to deploy an Ingress Controller.   An Ingress Controller is essentially a reverse proxy, which watches for updates to Kubernetes Ingress resources.  When an update occurs it is responsible for updating and reloading its configuration so the new routing rules are active.
+Before we can configure Ingress, we need to deploy an Ingress Controller.   An Ingress Controller is a reverse proxy, which watches for updates to Kubernetes Ingress resources, and handles the update and reload of its config when changes occur.
 
-There are a number of Ingress Controllers available, but here we'll use the stable nginx one.  
+There are a number of Ingress Controllers available, but here we're using the official Nginx one.
 
 ### Install with Helm
 
@@ -25,7 +25,7 @@ To install the Nginx Ingress Controller Helm chart, first confirm helm is runnin
 ```
 > helm init
 > helm upgrade --install ic nginx-ingress
-
+ 
 Release "ic" has been upgraded. Happy Helming!
 LAST DEPLOYED: Wed Oct 11 11:52:53 2017
 NAMESPACE: default
@@ -48,34 +48,34 @@ ic-nginx-ingress-default-backend  1        1        1           1          27s
 ...
 ```
 
-In the output above we can see the chart has created a _Service_ called `ic-nginx-ingress-controller` which exposes nginx on port 30881.  
+In the output above we can see the chart has created a Service called `ic-nginx-ingress-controller` which exposes nginx on port 30881.  
 
 Assuming your minikube instance is running on the default IP of 192.168.99.100, you should be able to hit nginx like this:
 
 ```
 > curl -X GET 192.168.99.100:30881
-
+ 
 default backend - 404
 ```
 
-The _default backend_ response indicates that we're hitting nginx, but it has no ingress rules which matched the incoming host/path.  This backend was deployed as a _Pod_ / _Service_ combo with the Helm chart and is used as the default route when there isn't a match in the config.  It always returns a static 404 response.
+The _default backend_ response indicates that we're hitting nginx, but it has no ingress rules which matched the incoming host/path.  This backend was deployed as a Service / Service combo with the Helm chart and is used as the default route when there isn't a match in the config.  It always returns a static 404 response.
 
 ### Configuring DNS
 
-In a cloud installation of Kubernetes, creating a _Service_ of type _LoadBalancer_ would have provisioned an external cloud load balancer (e.g. AWS ELB), which we could then assign a friendly DNS entry.
+In a cloud installation of Kubernetes, creating a Service of type _LoadBalancer_ would have provisioned an external cloud load balancer (e.g. AWS ELB), which we could then assign a friendly DNS entry.
 
 In minikube we can achieve a similar result with a reverse proxy and an addition to your hosts file.  
 
 #### Reverse Proxy
 
 ```
-docker run -p 80:80
-           -e IP=192.168.99.100
-           -e PORT=30881
+docker run -p 80:80 
+           -e IP=192.168.99.100 
+           -e PORT=30881 
            evns/local-proxy
 ```
 
-This runs a local proxy, configured to listen on port `127.0.0.1` and pass all traffic through to `$DESTINATION_IP:$DESTINATION_PORT`.  
+This runs a local proxy, configured to listen on port `127.0.0.1` and pass all traffic through to `$IP:$PORT`.  
 
 #### Hosts File
 
@@ -83,25 +83,25 @@ Add the following entry to the bottom of `/etc/hosts`:
 
 ```
 127.0.0.1     my-host
-```
+``` 
 
-Now we can hit the service on
+Now we can hit the service on 
 
 ```
 > curl -X GET my-host
-
+ 
 default backend - 404
 ```
 
 ### Recap
 
-We're now in a position to deploy a _Service_ and some _Ingress_, but first, a quick overview of what we've setup so far.
+We're now in a position to deploy a Service and some Ingress, but first, a quick overview of what we've setup so far.
 
 * We have `my-host` pointed at `127.0.0.1`
 * We have a reverse proxy mapping `127.0.0.1` to `192.168.99.100:30881`
-* We have a _Service_ for the Ingress Controller exposing port 30881.
+* We have a Service for the Ingress Controller exposing port 30881.
 * The Ingress Controller Service is Load Balancing across the Ingress Controller Pods
-* All requests to the Ingress Controller map to the _Default Backed_ which is a simple _Pod_ / _Service_ combo.
+* All requests to the Ingress Controller map to the _default backend_ which is a simple Pod / Service combo.
 
 ```
            my-host
@@ -172,7 +172,7 @@ Create the deployment, service, and ingress resources from this directory:
 
 ```
 > kubectl apply -f .
-
+ 
 deployment "my-app" configured
 ingress "my-ingress" created
 service "my-service" configured
@@ -191,7 +191,7 @@ Service Running (my-app-3503358887-p9grt)
 Let's deploy a second application with its own Ingress and see what happens:
 
 ```
-> kubectl apply -f ./other-app/
+> kubectl apply -f ./other-app/ 
 
 deployment "other-app" created
 ingress "other-ingress" created
