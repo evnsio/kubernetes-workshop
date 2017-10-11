@@ -1,4 +1,4 @@
-## 03 Create a Service
+# 03 Create a Service
 
 Services are used to:
 
@@ -49,7 +49,7 @@ root@my-curl-1857406192-d8dj6:/# curl -X GET http://my-service:8080
 Service Running (my-app-3509139055-wr5n4)
 ```
 
-### Outside the Cluster
+## Outside the Cluster
 
 The service definition above is only accessible from within the cluster.  To expose the service externally we can change the type to `NodePort`, at which point the service will be assigned a random port on _every_ host in the cluster.
 

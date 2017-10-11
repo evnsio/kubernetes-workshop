@@ -1,4 +1,4 @@
-## 02 Create a Deployment
+# 02 Create a Deployment
 
 Deployments are used to manage pods. They consist of:
 
@@ -54,7 +54,7 @@ my-app-3509139055-wr5n4   1/1       Running   0          4m
 
 We now have a deployment which has created three pods in the cluster.
 
-### Scheduling
+## Scheduling
 
 The deployment object doesn't just deploy the requested number of replicas once, but instead monitors continually to ensure the desired number of pods are present.   We can see this by manually deleting one:
 

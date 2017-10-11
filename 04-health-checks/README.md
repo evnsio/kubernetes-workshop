@@ -1,4 +1,4 @@
-## 04 Health Checks
+# 04 Health Checks
 
 The health of Pods in Kubernetes is split into two 'probes':
 
