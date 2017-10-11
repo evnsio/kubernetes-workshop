@@ -1,0 +1,12 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: other-service
+spec:
+  selector:
+    app: other-app
+  ports:
+    - protocol: TCP
+      name: web
+      port: 80
+      targetPort: 80

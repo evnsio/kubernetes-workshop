@@ -1,0 +1,16 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: other-app
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: other-app
+    spec:
+      containers:
+      - name: other-app
+        image: tutum/hello-world
+        ports:
+        - containerPort: 80
