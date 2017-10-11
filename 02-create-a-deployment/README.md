@@ -1,9 +1,9 @@
 ## 02 Create a Deployment
 
-Deployments are used to manage pods.  The consist of:
+Deployments are used to manage pods. They consist of:
 
 * A Pod specification (image, ports, labels etc.)
-* A Number a replicas
+* A number of replicas
 
 A simple Deployment spec looks like this:
 
