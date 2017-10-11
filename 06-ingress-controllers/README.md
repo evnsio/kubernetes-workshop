@@ -1,4 +1,4 @@
-# 05 Ingress Controllers
+# 06 Ingress Controllers
 
 In this section we'll create an Nginx Ingress Controller, and show how we can dynamically configure routing rules which map to our services.
 
@@ -12,7 +12,7 @@ Alternatively we might want `my-app.example.org/foo` to end up at the `foo` serv
 
 All of this (and quite a bit more!) can be configured through Ingress resources.
 
-## Configure an Ingress Controller 
+## Configure an Ingress Controller
 
 Before we can configure Ingress, we need to deploy an Ingress Controller.   An Ingress Controller is a reverse proxy, which watches for updates to Kubernetes Ingress resources, and handles the update and reload of its config when changes occur.
 
@@ -25,7 +25,7 @@ To install the Nginx Ingress Controller Helm chart, first confirm helm is runnin
 ```
 > helm init
 > helm upgrade --install ic nginx-ingress
- 
+
 Release "ic" has been upgraded. Happy Helming!
 LAST DEPLOYED: Wed Oct 11 11:52:53 2017
 NAMESPACE: default
@@ -54,7 +54,7 @@ Assuming your minikube instance is running on the default IP of 192.168.99.100, 
 
 ```
 > curl -X GET 192.168.99.100:30881
- 
+
 default backend - 404
 ```
 
@@ -69,9 +69,9 @@ In minikube we can achieve a similar result with a reverse proxy and an addition
 #### Reverse Proxy
 
 ```
-docker run -p 80:80 
-           -e IP=192.168.99.100 
-           -e PORT=30881 
+docker run -p 80:80
+           -e IP=192.168.99.100
+           -e PORT=30881
            evns/local-proxy
 ```
 
@@ -83,13 +83,13 @@ Add the following entry to the bottom of `/etc/hosts`:
 
 ```
 127.0.0.1     my-host
-``` 
+```
 
-Now we can hit the service on 
+Now we can hit the service on
 
 ```
 > curl -X GET my-host
- 
+
 default backend - 404
 ```
 
@@ -172,7 +172,7 @@ Create the deployment, service, and ingress resources from this directory:
 
 ```
 > kubectl apply -f .
- 
+
 deployment "my-app" configured
 ingress "my-ingress" created
 service "my-service" configured
@@ -191,7 +191,7 @@ Service Running (my-app-3503358887-p9grt)
 Let's deploy a second application with its own Ingress and see what happens:
 
 ```
-> kubectl apply -f ./other-app/ 
+> kubectl apply -f ./other-app/
 
 deployment "other-app" created
 ingress "other-ingress" created

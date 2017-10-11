@@ -1,0 +1,9 @@
+apiVersion: v1
+name: my-chart
+version: 1
+description: My Application in a Helm Chart
+sources:
+  - https://github.com/evnsio/kubernetes-workshop
+maintainers:
+  - name: Chris Evans
+    email: chris@evns.io

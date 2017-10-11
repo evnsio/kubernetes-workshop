@@ -1,0 +1,15 @@
+deployment:
+  name: helm-deployment
+  image: "evns/simple-service"
+  tag: "latest"
+  replicas: 1
+
+ingress:
+  name: helm-ingress
+  host: "my-host"
+  path: "/"
+
+service:
+  name: helm-service
+  port: 8080
+  type: NodePort
