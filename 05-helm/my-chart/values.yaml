@@ -2,7 +2,7 @@ deployment:
   name: helm-deployment
   image: "evns/simple-service"
   tag: "latest"
-  replicas: 1
+  replicas: 10
 
 ingress:
   name: helm-ingress
